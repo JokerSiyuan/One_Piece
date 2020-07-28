@@ -7,4 +7,5 @@ void anykey_continue(void);
 void show_msg(void);
 void login(void);
 char rep_password(char* pass,char* new_key);
+char reset_password(char* pass);
 #endif//TOOLS_H
