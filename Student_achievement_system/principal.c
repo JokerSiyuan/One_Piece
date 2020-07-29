@@ -1,9 +1,60 @@
 #include "tools.h"
 #include "teacher.h"
+#include "system.h"
+#include <stdio.h>
+#include <getch.h>
+#include <string.h>
+#include "principal.h"
 
+
+int i_tea = 0;
 //显示界面
 void show_principal(void)
 {
+	char pass_id[20] = {};
+	char password[7] = {};
+	printf("请输入工号和密码");
+	scanf("%s", pass_id);
+
+	for(;;)
+	{
+		if(0== strcmp(prin.id,pass_id))
+		{
+			break;
+		}
+		else
+		{
+			puts("工号错误，请重试!");
+			sleep(1);
+		}
+	}
+	for(;;)
+	{
+		if(0 == strcmp(prin.id,pass_id))
+		{
+			get_password(password,7,true);
+			if(cmp_password(password,prin.key))
+			{
+				printf("密码正确，等待进入。。。\n");
+				sleep(2);
+				break;
+			}
+			else
+			{
+				printf("密码错误请重试！\n");
+				sleep(1);
+			}
+		}
+	}
+	
+	if(prin.key == "123456")
+	{
+		char tmp[7] = {};
+		puts("首次登录系统，请修改密码");
+		get_password(tmp,7,true);
+		rep_password(prin.key,tmp);
+
+	}
 	for(;;)
 	{
 		system("clear");
@@ -15,37 +66,108 @@ void show_principal(void)
 		|									|
 		|___________________________________|
 		*/
-		//视觉暂留
-	
-		//任意键继续
-	
-		//登录
-	
+		puts("$~~~~~~~~~~~~~欢迎校长~~~~~~~~~~~~~~$");
+		puts("$~~~~~~~~~1、重置密码~~~~~~~~~~~~~~~$");
+		puts("$~~~~~~~~~2、添加教师~~~~~~~~~~~~~~~$");
+		puts("$~~~~~~~~~3、删除教师~~~~~~~~~~~~~~~$");
+		puts("$~~~~~~~~~4、显示在职教师~~~~~~~~~~~$");
+		puts("$~~~~~~~~~3、显示离职教师~~~~~~~~~~~$");
+		//swhich,获取键值(查成绩，改密码，查个人信息，退出)
+		switch(getch())
+		{
+			case '1': ;break;
+			case '2': add_teacher();break;
+			case '3': del_teacher();break;
+			case '4': show_all_out_teacher();break;
+			case '5': show_all_in_teacher();break;
+			case 'q': exit_teacher();return;	
 		//swhich,获取键值(重置自己密码，重置教师密码，添加教师,删除教师,显示所有在职教师，显示所有离职教师，退出)
+		}
 	}
 }
 
 //添加教师
 void add_teacher(void)
 {
+	while(tea[i_tea++].sex)
+	printf("请输入教师姓名:\n");
+	gets(tea[i_tea].name);
+	puts("请输入教师性别");
+	tea[i_tea].sex = getch();
+	printf("%c\n",tea[i_tea].sex);
+	puts("请输入教师工号：");
+	gets(tea[i_tea].id);
+	puts("添加联系人成功！");
 }
 
 //删除教师
 void del_teacher(void)
 {
+	char id[9] = {};
+	puts("请输入要删除的教师的工号");
+	gets(id);
+	for(int i=0; i<max; i++)
+	{
+		if(tea[i].in_out=0 && 0 == strcmp(id,tea[i].id))
+		{
+			tea[i].in_out = 1;
+			puts("删除教师成功，可惜了！");
+			return;
+		}
+	}
+	puts("输入工号有误!");
 }
 
 //显示所有在职教师
 void show_all_in_teacher(void)
 {
+	for(int i = 0; i< max ; i++)
+	{
+		if(tea[i].in_out = 0 && 0!=tea[i].sex)
+		{
+			printf("姓名:%s 性别:%c 工号:%s",tea[i].name,tea[i].sex,tea[i].id);
+		}
+	}
 }
 
 //显示所有离职教师
 void show_all_out_teacher(void)
 {
+	for(int i=0; i<max; i++)
+	{
+		if(tea[i].in_out = 1 && 0!=tea[i].sex)
+		{
+			printf("姓名:%s 性别:%c 工号:%s",tea[i].name,tea[i].sex,tea[i].id);
+		}
+	}
 }
 
 //退出并保存（退出到系统界面）
 void exit_principal(void)
 {
+	FILE* fwp_prin = fopen("principal.bin","w");
+	if(NULL == fwp_prin)
+	{
+		puts("保存失败！");
+		return ;
+	}
+
+	fwrite(&prin,sizeof(prin),1,fwp_prin);
+
+	fclose(fwp_prin);
+
+	FILE* fwp_tea=fopen("tea.bin","w");
+	if(NULL == fwp_tea)
+	{
+		puts("保存失败!");
+		return;
+	}
+
+	fwrite(&tea,sizeof(tea[0]),100,fwp_tea);
+
+	fclose(fwp_tea);
+
+	run_system();
+	return;
+
 }

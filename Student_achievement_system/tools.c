@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <string.h>
-#include <getch.h>
 #include "tools.h"
-
+#include "system.h"
+#include <ctype.h>
+#include <unistd.h>
+#include <stdbool.h>
 
 //接收密码函数
 void get_password(char* pass, size_t len,bool is_show)
@@ -32,35 +32,59 @@ void get_password(char* pass, size_t len,bool is_show)
 }
 
 //密码对比函数
-void cmp_password(char* pass,char* key)
+bool cmp_password(char* pass,char* key)
 {
-	
+	if(0 == strcmp(pass,key))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
-//登录函数（如果是第一次要强制改密码）
-void login(void)
-{
-	//判断密码是否为初始密码(123456)是的话则要强制改密码
-
-	//	
-}
 
 //任意建继续
 void anykey_continue(void)
 {
+	stdin->_IO_read_ptr = stdin->_IO_read_end;
+	puts("任意键继续...");
+	getch();
 }
 
 //视觉暂留（1.5秒）
 void show_msg(void)
 {
+	printf("%s",msg);
+	fflush(stdout);
+	usleep(sec*1000000);
 }
 
 //改密码
-char rep_password(char* pass,char* new_key)
+void rep_password(char* old_key,char* new_key)
 {
+	strcpy(old_key,new_key);//注意old是结构体.key的值
 }
 
 //重置密码为123456
-char reset_password(char* pass)
+void reset_password(char* old_key)
 {
+	*old_key = "123456";
 }
+
+
+//判断是否被锁
+bool is_locked(char lock)
+{
+	if(0 == lock)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
