@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
-
 #define max  100
 #define MAX  100	//最大教师数
 
@@ -46,7 +45,7 @@ typedef struct Principal
 	char key[7];
 }Principal;
 
-Principal prin = {.id="00000001",.key = "123456"};
+Principal prin;
 
 //函数
 void init_system(void);

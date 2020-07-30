@@ -5,11 +5,9 @@
 #include "tools.h"
 #include <stdio.h>
 #include <string.h>
-#include <getch.h>
 #include <stdlib.h>
 
-#define max  100	//最大学生数
-#define MAX  100	//最大教师数
+#define max 100
 
 //定义全局变量
 int n=0;	//定义学生数量n
@@ -18,8 +16,10 @@ int N=0;	//定义教师数量N
 
 void init_system(void)
 {
-	debug("%s\n",__func__);
 	//初始化数据
+    strcpy(prin.id,"00000001");
+    strcpy(prin.name,"孙令令");
+    strcpy(prin.key,"111111");
 	for(int i=0; i<max;i++)
 	{
 		stu[i].lock =0;
@@ -52,14 +52,14 @@ void init_system(void)
 		puts("文件打开失败!\n");
 		return;
 	}
-	fread(prin,sizeof(prin),1,frp_prin);
+	fread(&prin,sizeof(prin),1,frp_prin);
 	fclose(frp_prin);
+
 }
 
 //运行程序
 void run_system(void)
 {
-	debug("%s\n",__func__);
 	//显示界面（“欢迎来到指针带学教务系统！”）
 	for(;;)
 	{
@@ -71,7 +71,8 @@ void run_system(void)
 		puts("$~~~~~~~~~~~3、我是学生~~~~~~~~~~~~~~~~$");
 		puts("$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$");
 		puts("$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$");
-		puts("$~~~~~~~~~~~q、退出系统~~~~~~~~~~~~~~~~$");	
+		puts("$~~~~~~~~~~~q、退出系统~~~~~~~~~~~~~~~~$");		
+		printf("%s %s",prin.id,prin.key);
 	//获取键值（'s':进入学生系统，'t':进入教师系统，‘p’：进入校长系统）
 		switch(getch())
 		{
@@ -85,7 +86,6 @@ void run_system(void)
 
 void exit_system(void)
 {
-	debug("%s\n",__func__);
 	//显示界面（感谢使用指针带学教务系统！）
 		puts("$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$");
 		puts("$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$");
@@ -111,7 +111,7 @@ void exit_system(void)
 		puts("数据保存失败！");
 		return ;
 	}
-	fwrite(tea,sizeof(tea[0]),100,fwp_tea);
+	fwrite(&tea,sizeof(tea[0]),100,fwp_tea);
 	fclose(fwp_tea);
 
 	FILE* fwp_prin = fopen("prin.bin","w");
@@ -120,6 +120,7 @@ void exit_system(void)
 		puts("数据保存失败！");
 		return ;
 	}
-	fwrite(prin,sizeof(prin[0]),100,fwp_prin);
+	fwrite(&prin,sizeof(prin),100,fwp_prin);
 	fclose(fwp_prin);
+	return ;
 }

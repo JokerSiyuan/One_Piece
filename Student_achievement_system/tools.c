@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 //接收密码函数
 void get_password(char* pass, size_t len,bool is_show)
@@ -17,13 +18,13 @@ void get_password(char* pass, size_t len,bool is_show)
 		{
 			if(index > 0)
 			{
-				index--;
+				(index)--;
 				is_show && printf("\b \b");
 			}
 			continue;
 		}
 
-		pass[index++] = val;
+		pass[(index)++] = val;
 		is_show && printf("*");
 	}
 
@@ -54,12 +55,12 @@ void anykey_continue(void)
 }
 
 //视觉暂留（1.5秒）
-void show_msg(void)
+/*void show_msg(void)
 {
 	printf("%s",msg);
 	fflush(stdout);
 	usleep(sec*1000000);
-}
+}*/
 
 //改密码
 void rep_password(char* old_key,char* new_key)
@@ -68,10 +69,10 @@ void rep_password(char* old_key,char* new_key)
 }
 
 //重置密码为123456
-void reset_password(char* old_key)
+/*void reset_password(char* old_key)
 {
 	*old_key = "123456";
-}
+}*/
 
 
 //判断是否被锁

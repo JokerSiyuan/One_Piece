@@ -1,9 +1,9 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "tools.h"
 #include "teacher.h"
 #include "system.h"
-#include <stdio.h>
-#include <getch.h>
-#include <string.h>
 #include "principal.h"
 
 
@@ -11,13 +11,13 @@ int i_tea = 0;
 //显示界面
 void show_principal(void)
 {
-	char pass_id[20] = {};
+	char pass_id[9] = {};
 	char password[7] = {};
-	printf("请输入工号和密码");
-	scanf("%s", pass_id);
 
 	for(;;)
 	{
+		printf("请输入工号和密码");
+		scanf("%s",pass_id);
 		if(0== strcmp(prin.id,pass_id))
 		{
 			break;
@@ -30,8 +30,6 @@ void show_principal(void)
 	}
 	for(;;)
 	{
-		if(0 == strcmp(prin.id,pass_id))
-		{
 			get_password(password,7,true);
 			if(cmp_password(password,prin.key))
 			{
@@ -44,10 +42,9 @@ void show_principal(void)
 				printf("密码错误请重试！\n");
 				sleep(1);
 			}
-		}
 	}
 	
-	if(prin.key == "123456")
+	if(0 == strcmp("123456",prin.key))
 	{
 		char tmp[7] = {};
 		puts("首次登录系统，请修改密码");
@@ -108,7 +105,7 @@ void del_teacher(void)
 	gets(id);
 	for(int i=0; i<max; i++)
 	{
-		if(tea[i].in_out=0 && 0 == strcmp(id,tea[i].id))
+		if(tea[i].in_out==0 && 0 == strcmp(id,tea[i].id))
 		{
 			tea[i].in_out = 1;
 			puts("删除教师成功，可惜了！");
@@ -123,7 +120,7 @@ void show_all_in_teacher(void)
 {
 	for(int i = 0; i< max ; i++)
 	{
-		if(tea[i].in_out = 0 && 0!=tea[i].sex)
+		if(tea[i].in_out == 0 && 0!=tea[i].sex)
 		{
 			printf("姓名:%s 性别:%c 工号:%s",tea[i].name,tea[i].sex,tea[i].id);
 		}
@@ -135,7 +132,7 @@ void show_all_out_teacher(void)
 {
 	for(int i=0; i<max; i++)
 	{
-		if(tea[i].in_out = 1 && 0!=tea[i].sex)
+		if(tea[i].in_out == 1 && 0!=tea[i].sex)
 		{
 			printf("姓名:%s 性别:%c 工号:%s",tea[i].name,tea[i].sex,tea[i].id);
 		}

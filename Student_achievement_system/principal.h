@@ -1,6 +1,5 @@
 #ifndef PRINCIPAL_H
 #define PRINCIPAL_H
-#include <stdlib.h>
 void show_principal(void);
 void add_teacher(void);
 void del_teacher(void);

@@ -1,9 +1,11 @@
 #include "system.h"
+#include <unistd.h>
+#include <getch.h>
 
 
 int main()
 {
-	debug("%s\n",__func__);
+//	debug("%s\n",__func__);
 	//初始化系统，加载数据
 	init_system();
 	//进入系统，运行系统

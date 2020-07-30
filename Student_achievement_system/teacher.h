@@ -12,4 +12,5 @@ void show_all_lock_student(void);
 void show_all_out_student(void);
 void unlock_student(void);
 void exit_teacher(void);
+char* get_str(char* str,int size);
 #endif//TEACHER_H

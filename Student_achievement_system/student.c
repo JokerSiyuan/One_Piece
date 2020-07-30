@@ -5,7 +5,7 @@
 //显示界面("欢迎进入学生系统！")
 void show_student(void)
 {
-	char pass_id[20] = {};
+	char pass_id[9] = {};
 	char password[7] = {};
 	printf("请输入学号和密码");
 	scanf("%s", pass_id);
@@ -13,7 +13,7 @@ void show_student(void)
 	int index=0;
 	int* p =&index;
 
-	for( index; index<max; index++)
+	for(index=0;index<max;index++)
 	{
 		if(stu[index].lock == 1)
 		{
@@ -58,7 +58,7 @@ void show_student(void)
 		}
 	}
 	
-	if(stu[index].key == "123456")
+	if(strcmp("123456",stu[index].key))
 	{
 		char tmp[7] = {};
 		puts("首次登录系统，请修改密码");
