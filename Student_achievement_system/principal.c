@@ -68,15 +68,16 @@ void show_principal(void)
 		puts("$~~~~~~~~~2、添加教师~~~~~~~~~~~~~~~$");
 		puts("$~~~~~~~~~3、删除教师~~~~~~~~~~~~~~~$");
 		puts("$~~~~~~~~~4、显示在职教师~~~~~~~~~~~$");
-		puts("$~~~~~~~~~3、显示离职教师~~~~~~~~~~~$");
+		puts("$~~~~~~~~~5、显示离职教师~~~~~~~~~~~$");
+		puts("$~~~~~~~~~q、退出到系统界面~~~~~~~~~$");
 		//swhich,获取键值(查成绩，改密码，查个人信息，退出)
 		switch(getch())
 		{
 			case '1': ;break;
 			case '2': add_teacher();break;
 			case '3': del_teacher();break;
-			case '4': show_all_out_teacher();break;
-			case '5': show_all_in_teacher();break;
+			case '4': show_all_in_teacher();break;
+			case '5': show_all_out_teacher();break;
 			case 'q': exit_teacher();return;	
 		//swhich,获取键值(重置自己密码，重置教师密码，添加教师,删除教师,显示所有在职教师，显示所有离职教师，退出)
 		}
@@ -86,33 +87,37 @@ void show_principal(void)
 //添加教师
 void add_teacher(void)
 {
-	while(tea[i_tea++].sex)
+	while(tea[i_tea++].sex);
 	printf("请输入教师姓名:\n");
 	gets(tea[i_tea].name);
 	puts("请输入教师性别");
 	tea[i_tea].sex = getch();
 	printf("%c\n",tea[i_tea].sex);
-	puts("请输入教师工号：");
-	gets(tea[i_tea].id);
 	puts("添加联系人成功！");
+	sleep(1);
+	tea[i_tea].id = id_teacher();
+	tea[i_tea].in_out=0;
+	N++;
 }
 
 //删除教师
 void del_teacher(void)
 {
-	char id[9] = {};
+	int id_del = 0;
 	puts("请输入要删除的教师的工号");
-	gets(id);
+	scanf("%d",&id_del);
 	for(int i=0; i<max; i++)
 	{
-		if(tea[i].in_out==0 && 0 == strcmp(id,tea[i].id))
+		if((tea[i].in_out==0) && (id_del == tea[i].id))
 		{
 			tea[i].in_out = 1;
 			puts("删除教师成功，可惜了！");
+			sleep(1);
 			return;
 		}
 	}
 	puts("输入工号有误!");
+	N--;
 }
 
 //显示所有在职教师
@@ -122,9 +127,11 @@ void show_all_in_teacher(void)
 	{
 		if(tea[i].in_out == 0 && 0!=tea[i].sex)
 		{
-			printf("姓名:%s 性别:%c 工号:%s",tea[i].name,tea[i].sex,tea[i].id);
+			printf("姓名:%s 性别:%c 工号:%d\n",tea[i].name,tea[i].sex,tea[i].id);
+			
 		}
 	}
+	sleep(2);
 }
 
 //显示所有离职教师
@@ -134,7 +141,7 @@ void show_all_out_teacher(void)
 	{
 		if(tea[i].in_out == 1 && 0!=tea[i].sex)
 		{
-			printf("姓名:%s 性别:%c 工号:%s",tea[i].name,tea[i].sex,tea[i].id);
+			printf("姓名:%s 性别:%c 工号:%d\n",tea[i].name,tea[i].sex,tea[i].id);
 		}
 	}
 }

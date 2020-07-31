@@ -15,7 +15,7 @@ typedef struct Student
 {
 	char name[20];
 	char sex;
-	char id[9];
+	int  id;
 	char key[7];
 	char Chinese;
 	char Math;
@@ -30,7 +30,7 @@ typedef struct Teacher
 {
 	char name[20];
 	char sex;
-	char id[9];
+	int id;
 	char key[7];
 	char lock;
 	char in_out;

@@ -1,9 +1,9 @@
-#include "tools.h"
-#include "system.h"
 #include <ctype.h>
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "tools.h"
+#include "system.h"
 
 //接收密码函数
 void get_password(char* pass, size_t len,bool is_show)

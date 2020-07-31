@@ -1,11 +1,11 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "system.h"
 #include "teacher.h"
 #include "student.h"
 #include "principal.h"
 #include "tools.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
 #define max 100
 
@@ -26,6 +26,9 @@ void init_system(void)
 		tea[i].lock =0;
 		stu[i].in_out=0;
 		tea[i].in_out=0;
+		strcpy(tea[i].key,"123456");
+		strcpy(stu[i].key,"123456");
+
 	}
 	//从文件读取数据到内存
 	FILE* frp_stu = fopen("stu.bin","r");
@@ -86,6 +89,7 @@ void run_system(void)
 
 void exit_system(void)
 {
+	system("clear");
 	//显示界面（感谢使用指针带学教务系统！）
 		puts("$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$");
 		puts("$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$");
