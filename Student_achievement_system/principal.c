@@ -69,15 +69,19 @@ void show_principal(void)
 		puts("$~~~~~~~~~3、删除教师~~~~~~~~~~~~~~~$");
 		puts("$~~~~~~~~~4、显示在职教师~~~~~~~~~~~$");
 		puts("$~~~~~~~~~5、显示离职教师~~~~~~~~~~~$");
+		puts("$~~~~~~~~~6、显示所有被锁定的教师~~~~~$");
+		puts("$~~~~~~~~~7、重置教师密码~~~~~~~~~~~$");	
 		puts("$~~~~~~~~~q、退出到系统界面~~~~~~~~~$");
 		//swhich,获取键值(查成绩，改密码，查个人信息，退出)
 		switch(getch())
 		{
-			case '1': ;break;
+			case '1': rep_key_prin();break;
 			case '2': add_teacher();break;
 			case '3': del_teacher();break;
 			case '4': show_all_in_teacher();break;
 			case '5': show_all_out_teacher();break;
+			case '6':show_all_lock_teacher();break;
+			case '7':reset_teacher();break;
 			case 'q': exit_teacher();return;	
 		//swhich,获取键值(重置自己密码，重置教师密码，添加教师,删除教师,显示所有在职教师，显示所有离职教师，退出)
 		}
@@ -100,6 +104,27 @@ void add_teacher(void)
 	N++;
 }
 
+//重置教师密码
+void reset_teacher(void)
+{
+     printf("\n%s\n",__func__);
+	 int reset_id = 0;
+	 printf("请输入你想要重置密码的教师工号:");
+	 scanf("%d",&reset_id);
+     stdin->_IO_read_ptr =stdin->_IO_read_end;
+	 for(int i = 0;i < 100;i++)
+	 {
+		 if(reset_id == tea[i].id && tea[i].lock == 1)
+		 {
+		    strcpy(tea[i].key,"123456");
+		    tea[i].lock = 0;
+		    printf("密码重置成功\n");
+		    return;
+		 }
+     }   		 
+		
+}
+
 //删除教师
 void del_teacher(void)
 {
@@ -118,6 +143,18 @@ void del_teacher(void)
 	}
 	puts("输入工号有误!");
 	N--;
+}
+
+//显示所有被锁定账号
+void show_all_lock_teacher(void)
+{
+    for(int i = 0;i < 100;i++)
+    {
+       if(tea[i].lock)
+       {
+          printf("姓名：%s 性别：%c 学号：%d\n",tea[i].name,tea[i].sex,tea[i].id);
+       }
+    }
 }
 
 //显示所有在职教师
@@ -144,6 +181,24 @@ void show_all_out_teacher(void)
 			printf("姓名:%s 性别:%c 工号:%d\n",tea[i].name,tea[i].sex,tea[i].id);
 		}
 	}
+}
+
+void rep_key_prin(void)
+{
+	char key[7] = {};
+	puts("请输入密码以验证:");
+	gets(key);
+	if(0 != strcmp(key,prin.key))
+	{
+		puts("密码错误，爪巴");
+	anykey_continue();
+		return ;
+	}
+	puts("请输入新密码");
+	char new_key[7] = {};
+	gets(new_key);
+	strcpy(prin.key,new_key);
+	return;
 }
 
 //退出并保存（退出到系统界面）
