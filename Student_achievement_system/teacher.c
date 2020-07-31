@@ -387,7 +387,8 @@ void exit_teacher(void)
 	{
 		fscanf(fwp_s,"%hhd %hhd %hhd\n",&stu[i].Chinese,&stu[i].Math,&stu[i].English);
 	}
-
+	fclose(fwp_s);
+	fwp_s=NULL;
 	run_system();
 }
  

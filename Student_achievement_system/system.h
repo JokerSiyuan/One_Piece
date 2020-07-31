@@ -16,15 +16,19 @@ typedef struct Student
 	char name[20];
 	char sex;
 	int  id;
+	int rank;
 	char key[7];
+	short sum;
 	char Chinese;
 	char Math;
 	char English;
 	char lock;
 	char in_out;
+
 }Student;
 
 Student stu[100];
+Student* stu1;
 
 typedef struct Teacher
 {

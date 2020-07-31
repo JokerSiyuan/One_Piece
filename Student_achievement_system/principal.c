@@ -18,6 +18,7 @@ void show_principal(void)
 	{
 		printf("请输入工号和密码");
 		scanf("%s",pass_id);
+    	stdin->_IO_read_ptr =stdin->_IO_read_end;
 		if(0== strcmp(prin.id,pass_id))
 		{
 			break;
@@ -102,6 +103,7 @@ void add_teacher(void)
 	tea[i_tea].id = id_teacher();
 	tea[i_tea].in_out=0;
 	N++;
+	anykey_continue();
 }
 
 //重置教师密码
@@ -123,6 +125,7 @@ void reset_teacher(void)
 		 }
      }   		 
 		
+	anykey_continue();
 }
 
 //删除教师
@@ -143,6 +146,7 @@ void del_teacher(void)
 	}
 	puts("输入工号有误!");
 	N--;
+	anykey_continue();
 }
 
 //显示所有被锁定账号
@@ -155,6 +159,7 @@ void show_all_lock_teacher(void)
           printf("姓名：%s 性别：%c 学号：%d\n",tea[i].name,tea[i].sex,tea[i].id);
        }
     }
+	anykey_continue();
 }
 
 //显示所有在职教师
@@ -168,7 +173,7 @@ void show_all_in_teacher(void)
 			
 		}
 	}
-	sleep(2);
+	anykey_continue();
 }
 
 //显示所有离职教师
@@ -181,6 +186,7 @@ void show_all_out_teacher(void)
 			printf("姓名:%s 性别:%c 工号:%d\n",tea[i].name,tea[i].sex,tea[i].id);
 		}
 	}
+	anykey_continue();
 }
 
 void rep_key_prin(void)
@@ -191,8 +197,8 @@ void rep_key_prin(void)
 	if(0 != strcmp(key,prin.key))
 	{
 		puts("密码错误，爪巴");
-	anykey_continue();
 		return ;
+	anykey_continue();
 	}
 	puts("请输入新密码");
 	char new_key[7] = {};
