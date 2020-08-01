@@ -178,6 +178,7 @@ void add_student(void)
 	stu[index].id = id_student();
 
 	 puts("添加学生成功!");
+	anykey_continue();
 	 n++;
 }
 
@@ -194,6 +195,7 @@ void del_student(void)
 	 if(del_id1 != del_id2)
 	 {
 		puts("两次输入不一致！操作失败");
+	anykey_continue();
 	 	return;
 	 }
 	 for(int i = 0; i<max;i++)
@@ -203,6 +205,7 @@ void del_student(void)
 			 stu[i].in_out = 1;
 			 puts("删除学生成功！可惜!");
 			 n--;
+	anykey_continue();
 			 return;
 		 }
 	 }
@@ -222,6 +225,7 @@ void find_student(void)
 		 if((!stu[i].in_out) && (stu[i].sex) && (0 == strcmp(str,stu[i].name)))
 		 {
 		 	 printf("%s %c %d %hhd %hhd %hhd\n",stu[i].name,stu[i].sex,stu[i].id,stu[i].Chinese,stu[i].Math,stu[i].English);
+	anykey_continue();
 		 	 return;
 		 }
 	 }
@@ -254,12 +258,14 @@ void rep_student(void)
 			printf("%hhd\n",stu[i].English);
 			 
 			puts("修改学生成功!");
+	anykey_continue();
 			return;
 			 
 		 }
 		 
 	 }
 	 puts("要修改的学生不存在,请重新输入");
+	anykey_continue();
 }
 
 //录入学生成绩
@@ -277,6 +283,8 @@ void input_student(void)
 			 puts("请分别输入语文、数学、英语成绩:");
 		    scanf("%hhd%hhd%hhd",&stu[i].Chinese,&stu[i].Math,&stu[i].English);
 		    printf("录入成绩成功\n");
+			stu[i].sum = stu[i].Chinese+stu[i].Math+stu[i].English;
+	anykey_continue();
 		    return;
 		 }
      }
@@ -304,6 +312,7 @@ void reset_student(void)
 		    strcpy(stu[i].key,"123456");
 		    stu[i].lock = 0;
 		    printf("密码重置成功\n");
+	anykey_continue();
 		    return;
 		 }
      }   		 
@@ -318,9 +327,10 @@ void show_all_in_student(void)
        if(!stu[i].in_out && stu[i].sex)
        {
           printf("%s %c %d %hhd %hhd %hhd\n",stu[i].name,stu[i].sex,stu[i].id,stu[i].Chinese,stu[i].Math,stu[i].English);
+
        }
     }
-
+	anykey_continue();
 }
 
 //显示所有退学
@@ -331,8 +341,10 @@ void show_all_out_student(void)
        if(stu[i].in_out && stu[i].sex)
        {
           printf("姓名:%s 性别:%c 学号:%d 语文:%hhd 数学:%hhd 英语:%hhd\n",stu[i].name,stu[i].sex,stu[i].id,stu[i].Chinese,stu[i].Math,stu[i].English);
+
        }
     }
+	anykey_continue();
 }
 
 //显示所有被锁定账号
@@ -343,8 +355,10 @@ void show_all_lock_student(void)
        if(stu[i].lock)
        {
           printf("姓名：%s 性别：%c 学号：%d\n",stu[i].name,stu[i].sex,stu[i].id);
+
        }
     }
+	anykey_continue();
 }
 /*//解锁账号
 void unlock_student(void)

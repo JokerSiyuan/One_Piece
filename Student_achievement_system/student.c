@@ -115,6 +115,7 @@ void rep_key_stu(int* p)
 	char new_key[7] = {};
 	gets(new_key);
 	strcpy(stu[*p].key,new_key);
+	anykey_continue();
 	return;
 }
 
@@ -201,10 +202,10 @@ void sreach_s(int* p)
 		switch(getch())
 		{
 			case '1': printf("语文：%hhd,数学:%hhd,英语:%hhd\n",stu[*p].Chinese,stu[*p].Math,stu[*p].English);break;
-			case '2': rank_C();printf("语文排名全班第：%d",stu[*p].rank);break;
-			case '3': rank_M();printf("数学排名全班第：%d",stu[*p].rank);break;
-			case '4': rank_E();printf("英语排名全班第：%d",stu[*p].rank);break;
-			case '5': rank_S();printf("总分排名全班第：%d",stu[*p].rank);break;
+			case '2': rank_C();printf("语文排名全班第：%d\n",stu[*p].rank);break;
+			case '3': rank_M();printf("数学排名全班第：%d\n",stu[*p].rank);break;
+			case '4': rank_E();printf("英语排名全班第：%d\n",stu[*p].rank);break;
+			case '5': rank_S();printf("总分排名全班第：%d\n",stu[*p].rank);break;
 			case '6': printf("平均分:%d",(stu[*p].Chinese+stu[*p].Math+stu[*p].English)/3);break;
 			case 'q': return;
 		}

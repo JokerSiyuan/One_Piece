@@ -54,26 +54,6 @@ void anykey_continue(void)
 	getch();
 }
 
-//视觉暂留（1.5秒）
-/*void show_msg(void)
-{
-	printf("%s",msg);
-	fflush(stdout);
-	usleep(sec*1000000);
-}*/
-
-//改密码
-void rep_password(char* old_key,char* new_key)
-{
-	strcpy(old_key,new_key);//注意old是结构体.key的值
-}
-
-//重置密码为123456
-/*void reset_password(char* old_key)
-{
-	*old_key = "123456";
-}*/
-
 
 //判断是否被锁
 bool is_locked(char lock)
